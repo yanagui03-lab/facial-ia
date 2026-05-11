@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>L'Éclat - Consultor Facial IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-profundo: #003a5d;
+            --topo-arena: #948779;
+            --blanco-crema: #FDFCFB;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--azul-profundo);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            color: var(--blanco-crema);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        .instagram-view {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(180deg, var(--azul-profundo) 0%, #002339 100%);
+        }
+
+        .header-brand {
+            padding: 1.25rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(148, 135, 121, 0.1);
+            background-color: rgba(0, 58, 93, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(15px);
+        }
+
+        .hero-section {
+            position: relative;
+            height: 28vh;
+            background-image: linear-gradient(to bottom, rgba(0,58,93,0.1), rgba(0,58,93,1)), 
+                              url('https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .ai-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 135, 121, 0.25);
+            border-radius: 28px;
+            margin: -2rem 1.25rem 1.5rem 1.25rem;
+            padding: 1.75rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .input-field {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(148, 135, 121, 0.3);
+            color: white;
+            border-radius: 16px;
+            padding: 1.25rem;
+            width: 100%;
+            margin-top: 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            resize: none;
+        }
+
+        .btn-primary {
+            background-color: var(--topo-arena);
+            color: white;
+            padding: 1.25rem;
+            border-radius: 16px;
+            width: 100%;
+            font-weight: 600;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:active { transform: scale(0.96); opacity: 0.9; }
+
+        .service-pill {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(148, 135, 121, 0.1);
+            padding: 1.25rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .loading-dots:after {
+            content: ' .';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            40% { color: var(--topo-arena); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            60% { text-shadow: .25em 0 0 var(--topo-arena), .5em 0 0 rgba(0,0,0,0); }
+            80%, 100% { text-shadow: .25em 0 0 var(--topo-arena), .5em 0 0 var(--topo-arena); }
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="instagram-view">
+        <header class="header-brand">
+            <span class="serif text-xl tracking-[0.4em] uppercase" style="color: var(--topo-arena);">L'Éclat Facial</span>
+        </header>
+
+        <div class="hero-section">
+            <h2 class="serif text-4xl leading-tight fade-in">Tu piel tiene <br>una historia.</h2>
+        </div>
+
+        <div class="ai-card fade-in" style="animation-delay: 0.2s;">
+            <div class="flex items-center space-x-2 mb-3">
+                <span class="text-[10px] uppercase tracking-[0.2em] opacity-50">Análisis Skin-Genius</span>
+                <div class="h-[1px] flex-1 bg-[#948779] opacity-20"></div>
+            </div>
+            <h3 class="serif text-2xl mb-2" style="color: var(--topo-arena);">Consultoría IA</h3>
+            <p class="text-sm font-light opacity-80 leading-relaxed">
+                Describe tus inquietudes y recibe una recomendación personalizada.
+            </p>
+
+            <textarea id="userConcern" rows="3" class="input-field" placeholder="Escribe tus dudas..."></textarea>
+            <button onclick="getAIAdvice()" class="btn-primary">Consultar ahora ✨</button>
+
+            <div id="aiResponse" class="mt-6 p-5 bg-white bg-opacity-5 rounded-2xl border-l-4 border-[#948779] hidden fade-in">
+                <p id="responseText" class="text-sm leading-relaxed font-light italic text-gray-100"></p>
+                <button onclick="scrollToServices()" class="mt-4 text-[10px] uppercase font-bold text-[#948779] underline tracking-[0.2em] block">Ver tratamiento</button>
+            </div>
+
+            <div id="loading" class="mt-8 text-center hidden">
+                <span class="text-sm italic opacity-60 loading-dots">Analizando</span>
+            </div>
+        </div>
+
+        <div id="services" class="px-6 pb-24 fade-in" style="animation-delay: 0.4s;">
+            <h3 class="serif text-2xl mb-8 text-center">Nuestros Tratamientos</h3>
+            <div class="service-pill">
+                <div class="flex justify-between">
+                    <span class="serif text-xl">Renovación Celular</span>
+                </div>
+                <p class="text-[10px] opacity-70 uppercase tracking-widest">Peeling & Regeneración</p>
+            </div>
+            <div class="service-pill">
+                <div class="flex justify-between">
+                    <span class="serif text-xl">Deep Detox</span>
+                </div>
+                <p class="text-[10px] opacity-70 uppercase tracking-widest">Limpieza Profunda</p>
+            </div>
+            <div class="service-pill">
+                <div class="flex justify-between">
+                    <span class="serif text-xl">Glow Therapy</span>
+                </div>
+                <p class="text-[10px] opacity-70 uppercase tracking-widest">Masaje Kobido & Vitaminas</p>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a id="whatsappBtn" href="https://wa.me/50712345678?text=Hola!%20Quiero%20agendar%20mi%20facial." class="btn-primary inline-block no-underline">Agendar por WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = ""; 
+
+        async function getAIAdvice() {
+            const concern = document.getElementById('userConcern').value;
+            const responseDiv = document.getElementById('aiResponse');
+            const responseText = document.getElementById('responseText');
+            const loadingDiv = document.getElementById('loading');
+            
+            if (!concern.trim()) return;
+            responseDiv.classList.add('hidden');
+            loadingDiv.classList.remove('hidden');
+
+            const systemPrompt = "Eres un experto esteticista facial de lujo. Servicios: 1. Renovación Celular, 2. Deep Detox, 3. Glow Therapy. Responde breve, máximo 2 líneas, tono elegante en español.";
+
+            async function callGemini() {
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: concern }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                        })
+                    });
+                    const data = await response.json();
+                    const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    loadingDiv.classList.add('hidden');
+                    responseText.innerText = `“${aiText}”`;
+                    responseDiv.classList.remove('hidden');
+                    const waBtn = document.getElementById('whatsappBtn');
+                    waBtn.href = `https://wa.me/50712345678?text=${encodeURIComponent("Hola! La IA me recomendó: " + aiText)}`;
+                } catch (e) {
+                    loadingDiv.classList.add('hidden');
+                    responseText.innerText = "Escríbenos para un diagnóstico en vivo.";
+                    responseDiv.classList.remove('hidden');
+                }
+            }
+            callGemini();
+        }
+        function scrollToServices() { document.getElementById('services').scrollIntoView({ behavior: 'smooth' }); }
+    </script>
+</body>
+</html>
