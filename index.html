@@ -176,13 +176,16 @@
             </div>
 
             <div class="mt-12 text-center">
-                <a id="whatsappBtn" href="https://wa.me/50712345678?text=Hola!%20Quiero%20agendar%20mi%20facial." class="btn-primary inline-block no-underline">Agendar por WhatsApp</a>
+                <!-- Número actualizado a 66466862 -->
+                <a id="whatsappBtn" href="https://wa.me/50766466862?text=Hola!%20Quisiera%20agendar%20mi%20facial%20personalizado." class="btn-primary inline-block no-underline">Agendar por WhatsApp</a>
             </div>
         </div>
     </div>
 
     <script>
         const apiKey = ""; 
+        // Tu número de teléfono actualizado
+        const myPhoneNumber = "50766466862";
 
         async function getAIAdvice() {
             const concern = document.getElementById('userConcern').value;
@@ -212,10 +215,10 @@
                     responseText.innerText = `“${aiText}”`;
                     responseDiv.classList.remove('hidden');
                     const waBtn = document.getElementById('whatsappBtn');
-                    waBtn.href = `https://wa.me/50712345678?text=${encodeURIComponent("Hola! La IA me recomendó: " + aiText)}`;
+                    waBtn.href = `https://wa.me/${myPhoneNumber}?text=${encodeURIComponent("Hola! La IA me recomendó: " + aiText + ". Me gustaría agendar una cita.")}`;
                 } catch (e) {
                     loadingDiv.classList.add('hidden');
-                    responseText.innerText = "Escríbenos para un diagnóstico en vivo.";
+                    responseText.innerText = "Escríbenos directamente para un diagnóstico personalizado.";
                     responseDiv.classList.remove('hidden');
                 }
             }
